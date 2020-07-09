@@ -11,8 +11,14 @@
 static t_class *pa_string_tilde_class;
 
 typedef struct pa_string_tilde {
-  t_object m_obj; // pd object - always placed in first in the object's struct
-  t_float m_f;
+  t_object    m_obj;
+
+  float       m_sr;
+  float       m_phase;
+
+  t_outlet*   m_out;
+
+  t_float     m_f;
 } t_pa_string_tilde;
 
 static t_int *pa_string_tilde_perform(t_int *w);
