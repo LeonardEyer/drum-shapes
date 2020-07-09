@@ -1,0 +1,8 @@
+#N canvas 35 225 626 374 10;
+#X obj 129 236 dac~;
+#X obj 129 76 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 124 256;
+#X obj 129 127 pa.string~;
+#X connect 1 0 2 0;
+#X connect 2 0 0 0;
+#X connect 2 0 0 1;
