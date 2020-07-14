@@ -20,7 +20,7 @@ matrix:
       - mkdir build
       - cd build
       - cmake .. -DCMAKE_C_FLAGS=-m32
-      - cmake --build . --config Release
+      - cmake --build . -std=c99 --config Release
       - cd ..
 
   - os: linux
@@ -29,7 +29,7 @@ matrix:
       - mkdir build
       - cd build
       - cmake .. -DCMAKE_C_FLAGS=-m64
-      - cmake --build . --config Release
+      - cmake --build .  -std=c99 --config Release
       - cd ..
 
   - os: osx
