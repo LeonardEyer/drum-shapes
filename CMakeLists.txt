@@ -5,6 +5,8 @@ set(CMAKE_MACOSX_RPATH Off)
 set(CMAKE_OSX_DEPLOYMENT_TARGET 10.4)
 set(CMAKE_OSX_ARCHITECTURES "x86_64")
 
+set(CMAKE_C_STANDARD 99)
+
 include(pd.build/pd.cmake)
 
 # Project name is the name of the directory that contains this CMakeList file
