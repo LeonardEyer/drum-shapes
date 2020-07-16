@@ -10,6 +10,7 @@
 
 #define _USE_MATH_DEFINES
 #include <math.h> // cos...
+#include "StringVibration.h"
 
 static t_class *pa_string_tilde_class;
 
@@ -39,7 +40,7 @@ static t_int *pa_string_tilde_perform(t_int *w) {
   while (n--) {
     freq = *in++;
 
-    *out++ = cosf(phase * 2.f * M_PI);
+    *out++ = u(0.25f, phase); //cosf(phase * 2.f * (float) M_PI);
 
     phase_inc = (freq / sr);
 
@@ -79,7 +80,7 @@ static void pa_string_tilde_free(t_pa_string_tilde *x) {
 }
 
 extern void setup_pa0x2estring_tilde(void) {
-  t_class *c = class_new(gensym("pa.osc1~"),
+  t_class *c = class_new(gensym("pa.string~"),
                          (t_newmethod) pa_string_tilde_new, (t_method) pa_string_tilde_free,
                          sizeof(t_pa_string_tilde), CLASS_DEFAULT, A_GIMME, 0);
   if (c) {
