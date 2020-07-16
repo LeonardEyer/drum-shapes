@@ -44,8 +44,8 @@ static t_int *pa_string_tilde_perform(t_int *w) {
 
     phase_inc = (freq / sr);
 
-    if (phase >= 1.f) phase -= 1.f;
-    if (phase < 0.f) phase += 1.f;
+    if (phase >= 100.f) phase -= 100.f;
+    if (phase < 0.f) phase += 100.f;
 
     phase += phase_inc;
   }

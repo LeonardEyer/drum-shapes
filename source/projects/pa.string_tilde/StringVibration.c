@@ -6,8 +6,10 @@
 #define _USE_MATH_DEFINES
 #include <math.h> // cos...
 
+#define M_PI_POW_2 9.8696044011f
+
 float heavside(float x) {
-  return (float) (x >= 0);
+  return (float) (x >= 0.f);
 }
 
 float k(int i, float L) {
@@ -19,7 +21,6 @@ float w(int i, float alpha, float c_0, float L) {
 }
 
 float u(float x, float t) {
-  float sum = 0;
   int nFreq = 10;
   float alpha = 0.2f;
   float h_0 = 0.2f;
@@ -27,10 +28,13 @@ float u(float x, float t) {
   float L = 2.0f;
   float c_0 = 20;
 
-  for (int i = 0; i < nFreq; ++i) {
-    sum += (float) 2.0f * h_0 * sinf(M_PI * b * i) * sinf(k(i, L) * x) * cosf(w(i, alpha, c_0, L) * t) / powf(M_PI, 2.f) * powf((float) i, 2.f) * b * L * (1 - b);
+  float sum = 0.f;
+  for (int i = 1; i <= nFreq; ++i) {
+    float part = (float) 2.0f * h_0 * sinf(M_PI * b * i) * sinf(k(i, L) * x) * cosf(w(i, alpha, c_0, L) * t);
+    part /= M_PI_POW_2 * powf((float) i, 2.f) * b * L * (1 - b);
+    sum += part;
   }
-  sum *= powf(M_E, -alpha * t) * heavside(t);
+  sum *= powf(M_E, - alpha * t) * heavside(t);
 
   return sum;
 }
