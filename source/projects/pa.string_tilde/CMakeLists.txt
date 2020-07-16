@@ -20,5 +20,3 @@ set(PROJECT_FILES
 )
 
 add_pd_external(${PROJECT_NAME} ${PRODUCT_NAME} "${PROJECT_FILES}")
-
-#add_executable(testVibration main.c StringVibration.c StringVibration.h)
