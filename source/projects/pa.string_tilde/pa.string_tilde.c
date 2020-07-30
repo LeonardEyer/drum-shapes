@@ -55,8 +55,9 @@ static t_int *pa_string_tilde_perform(t_int *w) {
 
   while (n--) {
     L = fabsf(*in++);
-    //s.density = fabsf(*in2++);
-    //s.tension = fabsf(*in2++);
+    s.density = fabsf(*in2++);
+    s.tension = fabsf(*in3++);
+    s.diameter = fabsf(*in4++);
     s.length = L;
 
     *out++ = u(s, 0.25f * L, phase);
