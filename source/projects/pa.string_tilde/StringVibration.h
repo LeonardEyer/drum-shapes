@@ -1,19 +1,18 @@
 //
 // Created by Leonard Eyer on 16.07.20.
 //
+/** @file
+ * String Vibration model
+ * */
 
 #ifndef DRUM_SHAPES_SOURCE_PROJECTS_PA_STRING_TILDE_STRINGVIBRATION_H_
 #define DRUM_SHAPES_SOURCE_PROJECTS_PA_STRING_TILDE_STRINGVIBRATION_H_
 
 typedef struct string {
-  // L
-  float length;
-  // psi
-  float tension;
-  // D
-  float diameter;
-  // rho
-  float density;
+  float length; ///< Length L
+  float tension; ///< Tension psi
+  float diameter; ///< Diameter D
+  float density; ///< Density rho
 
 } string;
 
@@ -25,14 +24,14 @@ typedef struct string {
 float phase_velocity(string s);
 
 /**
- * Base frequency of the string vibration
+ * @brief Base frequency of the string vibration
  * @param s the string
  * @return lowest frequency
  */
 float base_freq(string s);
 
 /**
- * Evaluation of the wave equation
+ * @brief Evaluation of the wave equation
  * @param s string
  * @param x position of plucking
  * @param t time
