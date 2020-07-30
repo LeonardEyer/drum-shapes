@@ -17,15 +17,24 @@ float k(int i, float L) {
 }
 
 float w(int i, float alpha, float c_0, float L) {
-    return sqrtf(powf(k(i, L) * c_0, 2.f) - powf(alpha, 2.f));
+  return sqrtf(powf(k(i, L) * c_0, 2.f) - powf(alpha, 2.f));
 }
 
-float u(float L, float x, float t) {
+float phase_velocity(string s) {
+  return 2 / s.diameter * sqrtf((float) (s.tension / M_PI * s.density));
+}
+
+float base_freq(string s) {
+  return phase_velocity(s) / (2 * s.length);
+}
+
+float u(string s, float x, float t) {
   int nFreq = 10;
   float alpha = 0.2f;
   float h_0 = 0.2f;
-  float b = 0.8f;
-  float c_0 = 20;
+  float b = x / s.length;
+  float c_0 = phase_velocity(s);
+  float L = s.length;
 
   float sum = 0.f;
   for (int i = 1; i <= nFreq; ++i) {
@@ -34,7 +43,7 @@ float u(float L, float x, float t) {
     part /= M_PI_POW_2 * powf((float) i, 2.f) * b * L * (1 - b);
     sum += part;
   }
-  sum *= powf(M_E, - alpha * t) * heavside(t);
+  sum *= powf(M_E, -alpha * t) * heavside(t);
 
   return sum;
 }

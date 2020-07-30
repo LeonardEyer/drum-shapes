@@ -5,6 +5,20 @@
 #ifndef DRUM_SHAPES_SOURCE_PROJECTS_PA_STRING_TILDE_STRINGVIBRATION_H_
 #define DRUM_SHAPES_SOURCE_PROJECTS_PA_STRING_TILDE_STRINGVIBRATION_H_
 
-float u(float L, float x, float t);
+typedef struct string {
+  // L
+  float length;
+  // psi
+  float tension;
+  // D
+  float diameter;
+  // rho
+  float density;
+
+} string;
+
+float base_freq(string s);
+
+float u(string s, float x, float t);
 
 #endif //DRUM_SHAPES_SOURCE_PROJECTS_PA_STRING_TILDE_STRINGVIBRATION_H_
