@@ -34,8 +34,13 @@ static void pa_string_tilde_bang(t_pa_string_tilde *x) {
 static t_int *pa_string_tilde_perform(t_int *w) {
   t_pa_string_tilde *x = (t_pa_string_tilde *) (w[1]);
   t_sample *in = (t_sample *) (w[2]);
-  t_sample *out = (t_sample *) (w[3]);
-  int n = (int) (w[4]);
+
+  t_sample *in2 = (t_sample *) (w[3]);
+  t_sample *in3 = (t_sample *) (w[4]);
+  t_sample *in4 = (t_sample *) (w[5]);
+
+  t_sample *out = (t_sample *) (w[6]);
+  int n = (int) (w[7]);
 
   const float sr = x->m_sr;
   float freq = 0.f;
@@ -50,6 +55,8 @@ static t_int *pa_string_tilde_perform(t_int *w) {
 
   while (n--) {
     L = fabsf(*in++);
+    //s.density = fabsf(*in2++);
+    //s.tension = fabsf(*in2++);
     s.length = L;
 
     *out++ = u(s, 0.25f * L, phase);
@@ -65,16 +72,16 @@ static t_int *pa_string_tilde_perform(t_int *w) {
 
   x->m_phase = phase;
 
-  return (w + 5);
+  return (w + 8);
 }
 
 static void pa_string_tilde_dsp(t_pa_string_tilde *x, t_signal **sp) {
   x->m_sr = sys_getsr();
 
-  dsp_add(pa_string_tilde_perform, 4,
+  dsp_add(pa_string_tilde_perform, 7,
           x,
-          sp[0]->s_vec,   // inlet 0
-          sp[1]->s_vec,   // outlet 0
+          sp[0]->s_vec, sp[1]->s_vec, sp[2]->s_vec, sp[3]->s_vec,   // inlet 0, 1, 2, 3
+          sp[4]->s_vec,   // outlet 0
           sp[0]->s_n);    // vectorsize
 }
 
@@ -82,6 +89,10 @@ static void *pa_string_tilde_new(t_symbol *s, int argc, t_atom *argv) {
   t_pa_string_tilde *x = (t_pa_string_tilde *) pd_new(pa_string_tilde_class);
   if (x) {
     x->m_phase = 0.f;
+    signalinlet_new((t_object *)x, 0);
+    signalinlet_new((t_object *)x, 0);
+    signalinlet_new((t_object *)x, 0);
+
     x->m_out = outlet_new((t_object *) x, &s_signal);
   }
 
