@@ -27,6 +27,10 @@ typedef struct _pa_string_tilde {
 
 } t_pa_string_tilde;
 
+static void pa_string_tilde_bang(t_pa_string_tilde *x) {
+  x->m_phase = 0;
+}
+
 static t_int *pa_string_tilde_perform(t_int *w) {
   t_pa_string_tilde *x = (t_pa_string_tilde *) (w[1]);
   t_sample *in = (t_sample *) (w[2]);
@@ -52,12 +56,11 @@ static t_int *pa_string_tilde_perform(t_int *w) {
 
     freq = base_freq(s);
 
-    phase_inc = (440 / sr);
-
-    if (phase >= 100.f) phase -= 100.f;
-    if (phase < 0.f) phase += 100.f;
+    phase_inc = (freq / sr);
 
     phase += phase_inc;
+    // Clip at 16
+    phase = phase > 16 ? 16 : phase;
   }
 
   x->m_phase = phase;
@@ -96,6 +99,7 @@ extern void setup_pa0x2estring_tilde(void) {
   if (c) {
     CLASS_MAINSIGNALIN(c, t_pa_string_tilde, m_f);
     class_addmethod(c, (t_method) pa_string_tilde_dsp, gensym("dsp"), A_CANT);
+    class_addbang(c, (t_method) pa_string_tilde_bang);
   }
 
   pa_string_tilde_class = c;

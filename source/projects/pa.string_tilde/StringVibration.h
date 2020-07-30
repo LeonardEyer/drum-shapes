@@ -17,6 +17,8 @@ typedef struct string {
 
 } string;
 
+float phase_velocity(string s);
+
 float base_freq(string s);
 
 float u(string s, float x, float t);
