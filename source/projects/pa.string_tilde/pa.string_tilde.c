@@ -33,12 +33,14 @@ static void pa_string_tilde_bang(t_pa_string_tilde *x) {
 
 static t_int *pa_string_tilde_perform(t_int *w) {
   t_pa_string_tilde *x = (t_pa_string_tilde *) (w[1]);
-  t_sample *in = (t_sample *) (w[2]);
 
+  // Signal inlets
+  t_sample *in = (t_sample *) (w[2]);
   t_sample *in2 = (t_sample *) (w[3]);
   t_sample *in3 = (t_sample *) (w[4]);
   t_sample *in4 = (t_sample *) (w[5]);
 
+  // Outlet
   t_sample *out = (t_sample *) (w[6]);
   int n = (int) (w[7]);
 
@@ -47,25 +49,25 @@ static t_int *pa_string_tilde_perform(t_int *w) {
   float L = 0.f;
   float phase_inc = 0.f;
   float phase = x->m_phase;
-
   string s;
-  s.density = 7.726f;
-  s.tension = 13.1f;
-  s.diameter = 0.00899f;
 
   while (n--) {
-    L = fabsf(*in++);
+    // Read parameters of the string
+    s.length = fabsf(*in++);
     s.density = fabsf(*in2++);
     s.tension = fabsf(*in3++);
     s.diameter = fabsf(*in4++);
-    s.length = L;
 
-    *out++ = u(s, 0.25f * L, phase);
+    // Evaluate wave equation for string at a position 1/4 of the length and current phase
+    *out++ = u(s, 0.25f * s.length, phase);
 
+    // Compute the base frequency of the string
     freq = base_freq(s);
 
+    // Compute the increment
     phase_inc = (freq / sr);
 
+    // Apply increment
     phase += phase_inc;
     // Clip at 16
     phase = phase > 16 ? 16 : phase;
