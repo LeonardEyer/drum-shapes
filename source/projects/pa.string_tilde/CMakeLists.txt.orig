@@ -1,0 +1,31 @@
+cmake_minimum_required(VERSION 3.0)
+
+set(PRODUCT_NAME pa.string~)
+set(PROJECT_NAME ${project_dir})
+
+file(GLOB_RECURSE PROJECT_INCLUDES
+	${CMAKE_CURRENT_SOURCE_DIR}/*.h
+	${CMAKE_CURRENT_SOURCE_DIR}/*.hpp
+)
+
+file(GLOB_RECURSE PROJECT_SRC
+	${CMAKE_CURRENT_SOURCE_DIR}/*.c
+	${CMAKE_CURRENT_SOURCE_DIR}/*.cpp
+	${PROJECT_INCLUDES}
+)
+
+set(PROJECT_FILES
+	${PROJECT_SRC}
+	${PROJECT_INCLUDES}
+)
+
+<<<<<<< HEAD
+add_pd_external(${PROJECT_NAME} ${PRODUCT_NAME} "${PROJECT_FILES}")
+
+
+#add_custom_target(testVibration)
+add_executable(testVibration main.c StringVibration.c StringVibration.h)
+target_link_libraries(testVibration m)
+=======
+add_pd_external(${PROJECT_NAME} ${PRODUCT_NAME} "${PROJECT_FILES}")
+>>>>>>> 9c2a130baa9d33bf50949c1b25ef8042ca16dd53
