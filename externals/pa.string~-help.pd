@@ -1,24 +1,56 @@
-#N canvas 509 89 647 460 10;
-#X obj 70 38 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
--262144 -1 -1 0 256;
-#X obj 70 63 sig~ 440;
+#N canvas 218 87 734 460 10;
 #X obj 69 331 dac~ 1 2, f 9;
 #X obj 69 293 *~ 0;
-#X obj 90 269 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 90 269 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
 1;
 #X text 327 420 https://github.com/pierreguillot/Pad;
-#X obj 69 203 pa.string~;
-#X obj 217 167 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
--262144 -1 -1 0 256;
-#X obj 217 192 sig~ 440;
-#X obj 215 31 vsl 15 128 0.1 10 0 0 empty empty empty 0 -9 0 10 -262144
--1 -1 0 1;
-#X connect 0 0 1 0;
-#X connect 1 0 6 0;
-#X connect 3 0 2 0;
-#X connect 3 0 2 1;
-#X connect 4 0 3 1;
-#X connect 6 0 3 0;
-#X connect 7 0 8 0;
-#X connect 8 0 6 1;
-#X connect 9 0 7 0;
+#X obj 72 199 pa.string~;
+#X obj 66 143 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 21.4173 256;
+#X obj 20 184 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 69 126 hsl 128 15 0 40 0 0 empty empty Length -2 -8 0 10 -262144
+-1 -1 6889 1;
+#X obj 20 161 metro;
+#X msg 20 136 500;
+#X obj 20 111 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 218 141 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 11.9685 256;
+#X obj 221 123 hsl 128 15 0 40 0 0 empty empty Density -2 -8 0 10 -262144
+-1 -1 3853 1;
+#X obj 469 91 list 30.2 7.726 13.1 0.00899;
+#X obj 187 34 unpack f f f f;
+#X obj 468 67 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 369 141 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 13.1 256;
+#X obj 372 123 hsl 128 15 0 40 0 0 empty empty Tension -2 -8 0 10 -262144
+-1 -1 4159 1;
+#X obj 518 141 nbx 10 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+10 -262144 -1 -1 0.00899 256;
+#X obj 521 123 hsl 128 15 0 0.002 0 0 empty empty Diameter -2 -8 0
+10 -262144 -1 -1 12700 1;
+#X connect 1 0 0 0;
+#X connect 1 0 0 1;
+#X connect 2 0 1 1;
+#X connect 4 0 1 0;
+#X connect 5 0 4 0;
+#X connect 6 0 4 0;
+#X connect 7 0 5 0;
+#X connect 8 0 6 0;
+#X connect 9 0 8 1;
+#X connect 9 0 8 0;
+#X connect 10 0 9 0;
+#X connect 11 0 4 1;
+#X connect 12 0 11 0;
+#X connect 13 0 14 0;
+#X connect 14 0 7 0;
+#X connect 14 1 12 0;
+#X connect 14 2 17 0;
+#X connect 14 3 19 0;
+#X connect 15 0 13 0;
+#X connect 16 0 4 2;
+#X connect 17 0 16 0;
+#X connect 18 0 4 3;
+#X connect 19 0 18 0;
