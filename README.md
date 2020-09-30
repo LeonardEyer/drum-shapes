@@ -1,4 +1,4 @@
-# String~
+# Drum shapes
 
 # Setup
 Clone and initialize the submodules
@@ -17,5 +17,7 @@ make
 ```
 
 # Use
-
 The built externals are located [here](externals). Simply open the corresponding ``<name>-help.pd`` file using PureData
+
+# Documentation
+[Project specific](source/projects) documentation can be generated using the provided Doxyfile.
