@@ -1,5 +1,7 @@
 # Drum shapes
 
+- String Vibration [pa.string~](source/projects/pa.string_tilde)
+
 # Setup
 Clone and initialize the submodules
 ````
