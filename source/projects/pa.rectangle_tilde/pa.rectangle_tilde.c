@@ -11,11 +11,11 @@
 #define _USE_MATH_DEFINES
 #include <math.h> // cos...
 #include <stdlib.h>
-#include "RectangelVibration.h"
+#include "RectangleVibration.h"
 
-static t_class *pa_string_tilde_class;
+static t_class *pa_rectangle_tilde_class;
 
-typedef struct _pa_string_tilde {
+typedef struct _pa_rectangle_tilde {
   t_object m_obj;
 
   float m_sr;
@@ -25,10 +25,10 @@ typedef struct _pa_string_tilde {
 
   t_float m_f;
 
-} t_pa_string_tilde;
+} t_pa_rectangle_tilde;
 
-static t_int *pa_string_tilde_perform(t_int *w) {
-  t_pa_string_tilde *x = (t_pa_string_tilde *) (w[1]);
+static t_int *pa_rectangle_tilde_perform(t_int *w) {
+  t_pa_rectangle_tilde *x = (t_pa_rectangle_tilde *) (w[1]);
   t_sample *in = (t_sample *) (w[2]);
   t_sample *in2 = (t_sample *) (w[3]);
   t_sample *out = (t_sample *) (w[4]);
@@ -59,18 +59,18 @@ static t_int *pa_string_tilde_perform(t_int *w) {
   return (w + 6);
 }
 
-static void pa_string_tilde_dsp(t_pa_string_tilde *x, t_signal **sp) {
+static void pa_rectangle_tilde_dsp(t_pa_rectangle_tilde *x, t_signal **sp) {
   x->m_sr = sys_getsr();
 
-  dsp_add(pa_string_tilde_perform, 5,
+  dsp_add(pa_rectangle_tilde_perform, 5,
           x,
           sp[0]->s_vec, sp[1]->s_vec,   // inlet 0 and 1
           sp[2]->s_vec,   // outlet 0
           sp[0]->s_n);    // vectorsize
 }
 
-static void *pa_string_tilde_new(t_symbol *s, int argc, t_atom *argv) {
-  t_pa_string_tilde *x = (t_pa_string_tilde *) pd_new(pa_string_tilde_class);
+static void *pa_rectangle_tilde_new(t_symbol *s, int argc, t_atom *argv) {
+  t_pa_rectangle_tilde *x = (t_pa_rectangle_tilde *) pd_new(pa_rectangle_tilde_class);
   if (x) {
     x->m_phase = 0.f;
     signalinlet_new((t_object *)x, 0);
@@ -80,18 +80,18 @@ static void *pa_string_tilde_new(t_symbol *s, int argc, t_atom *argv) {
   return (x);
 }
 
-static void pa_string_tilde_free(t_pa_string_tilde *x) {
+static void pa_rectangle_tilde_free(t_pa_rectangle_tilde *x) {
   outlet_free(x->m_out);
 }
 
-extern void setup_pa0x2estring_tilde(void) {
-  t_class *c = class_new(gensym("pa.string~"),
-                         (t_newmethod) pa_string_tilde_new, (t_method) pa_string_tilde_free,
-                         sizeof(t_pa_string_tilde), CLASS_DEFAULT, A_GIMME, 0);
+extern void setup_rectangle_tilde(void) {
+  t_class *c = class_new(gensym("pa.rectangle~"),
+                         (t_newmethod) pa_rectangle_tilde_new, (t_method) pa_rectangle_tilde_free,
+                         sizeof(t_pa_rectangle_tilde), CLASS_DEFAULT, A_GIMME, 0);
   if (c) {
-    CLASS_MAINSIGNALIN(c, t_pa_string_tilde, m_f);
-    class_addmethod(c, (t_method) pa_string_tilde_dsp, gensym("dsp"), A_CANT);
+    CLASS_MAINSIGNALIN(c, t_pa_rectangle_tilde, m_f);
+    class_addmethod(c, (t_method) pa_rectangle_tilde_dsp, gensym("dsp"), A_CANT);
   }
 
-  pa_string_tilde_class = c;
+  pa_rectangle_tilde_class = c;
 }

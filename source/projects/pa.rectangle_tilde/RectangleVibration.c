@@ -16,7 +16,7 @@ void setBorders(float left, float right) {
   b = right;
 }
 float eigenValue(int n, int m) {
-  float lambda_nm = M_PI_POW_2*sqrt(n)/sqrtf(a) + M_PI_POW_2*sqrt(m)/sqrtf(b);
+  float lambda_nm = M_PI_POW_2*pow(n,2)/pow(a,2) + M_PI_POW_2*pow(m,2)/pow(b,2);
   return lambda_nm;
 }
   
@@ -26,16 +26,30 @@ float spaceVibration(int n, int m, float x, float y) {
   return vibration;
 }
 
+float coef_a(int n, int m) {
+  float alpha = 0.1;
+  return (alpha*4/M_PI_POW_2)*sin(M_PI*m)*sin(M_PI*n)/((pow(m,2)-1)*(pow(n,2)-1));
+}
+
+float coef_b(int n, int m) {
+  float mu = sqrtf(eigenValue(n,m));
+  return coef_a(n,m)/mu;
+}
+
 float timeVibration(int n, int m, float t) {
   float vibration = 0.f;
   float mu = sqrtf(eigenValue(n,m));
-  vibration = a*cos(mu*t)+b*sin(mu*t);
+  vibration = coef_a(n,m)*cos(mu*t)+coef_b(n,m)*sin(mu*t);
   return vibration;
 }
 
-float Vibration(int n, int m, float x, float y, float t) {
+float vibration(float x, float y, float t) {
   float vibration = 0.f;
-  vibration = spaceVibration(n, m, x, y)*timeVibration(n,m,t);
+  for(int n=1; n<=10; n++) {
+    for(int m=1; m<=10; m++) {
+      vibration += spaceVibration(n, m, x, y)*timeVibration(n,m,t);
+    }
+  }
   return vibration;
 }
 

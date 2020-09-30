@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 
-set(PRODUCT_NAME pa.string~)
+set(PRODUCT_NAME pa.rectangle~)
 set(PROJECT_NAME ${project_dir})
 
 file(GLOB_RECURSE PROJECT_INCLUDES
