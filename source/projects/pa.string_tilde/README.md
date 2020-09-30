@@ -1,4 +1,4 @@
-# string
+# string~
 
 Simulates the vibration of a string defined by
 - Length
