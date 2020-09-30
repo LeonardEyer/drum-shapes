@@ -84,7 +84,7 @@ static void pa_rectangle_tilde_free(t_pa_rectangle_tilde *x) {
   outlet_free(x->m_out);
 }
 
-extern void setup_rectangle_tilde(void) {
+extern void setup_pa0x2erectangle_tilde(void) {
   t_class *c = class_new(gensym("pa.rectangle~"),
                          (t_newmethod) pa_rectangle_tilde_new, (t_method) pa_rectangle_tilde_free,
                          sizeof(t_pa_rectangle_tilde), CLASS_DEFAULT, A_GIMME, 0);
